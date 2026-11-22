@@ -91,10 +91,12 @@ derniers changements du journal, ou aucune liste. Lecture seule.
   changement, équipement, numéro de l'équipement, utilisateur, heure du
   changement. La première lecture après l'installation est silencieuse : les
   changements passés ne sont pas annoncés. Dix équipements au plus par
-  lecture (un import en masse n'inonde pas les scènes).
+  lecture (un import en masse n'inonde pas les scènes). Un préfixe déjà au-dessus du seuil quand il commence
+  à être suivi est annoncé dès la première lecture.
 
 Ce qui a été annoncé est enregistré dans le volume de données de
-l'intégration : un redémarrage n'annonce rien deux fois.
+l'intégration : un redémarrage n'annonce rien deux fois. Une nouvelle adresse
+de NetBox repart d'une nouvelle base.
 
 ## Action de scène
 

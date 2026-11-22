@@ -89,6 +89,9 @@ function filterRows(name, rows, params) {
     ) {
       return false;
     }
+    if (params.has('id__gt') && !(row.id > Number(params.get('id__gt')))) {
+      return false;
+    }
     if (params.has('name__ie') && row.name.toLowerCase() !== params.get('name__ie').toLowerCase()) {
       return false;
     }

@@ -90,10 +90,12 @@ su ocupación (rojo a partir del umbral, naranja 10 puntos por debajo), los
   dispositivo, número del dispositivo, usuario, hora del cambio. La primera
   lectura tras la instalación es silenciosa: los cambios pasados no se
   anuncian. Diez dispositivos como máximo por lectura (una importación masiva
-  no inunda las escenas).
+  no inunda las escenas). Un prefijo que ya supera el umbral cuando empieza a
+  seguirse se anuncia en la primera lectura.
 
 Lo anunciado se guarda en el volumen de datos de la integración: un reinicio
-no anuncia nada dos veces.
+no anuncia nada dos veces. Una nueva dirección de NetBox parte de una nueva
+base.
 
 ## Acción de escena
 

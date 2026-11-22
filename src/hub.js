@@ -52,8 +52,6 @@ export const DEFAULT_TIMINGS = {
 export const MAX_EVENTS_PER_READ = 10;
 // Changes kept for the text feature and the widget.
 export const RECENT_CHANGES = 5;
-// Device changes read per refresh, to find the new ones.
-const DEVICE_CHANGES = 50;
 
 const optionalKinds = ['forbidden', 'not_found'];
 
@@ -235,8 +233,16 @@ export class Hub {
         throw err;
       }
     }
-    const page = await client.page('/ipam/prefixes/', { prefix: entry, limit: '50' });
-    return page.results;
+    try {
+      const page = await client.page('/ipam/prefixes/', { prefix: entry, limit: '50' });
+      return page.results;
+    } catch (err) {
+      // A CIDR NetBox refuses (400): reported like a missing prefix.
+      if (err instanceof NetBoxError && err.kind === 'rejected') {
+        return [];
+      }
+      throw err;
+    }
   }
 
   /** The utilization of one prefix, read like NetBox computes it. */
@@ -270,15 +276,24 @@ export class Hub {
     const changes = await this.#optional('object changes', () =>
       client.changes({ limit: String(RECENT_CHANGES) }),
     );
+    // The device changes since the last one seen, every page of them (a bulk
+    // edit must not push a creation out of the window); the first read only
+    // needs the newest one, as a baseline.
+    const known = this.notified?.instance === this.config.url ? this.notified.lastChangeId : null;
     const deviceChanges =
       changes &&
-      (await client.changes({ changed_object_type: 'dcim.device', limit: String(DEVICE_CHANGES) }));
+      (Number.isInteger(known)
+        ? await client.changes(
+            { changed_object_type: 'dcim.device', id__gt: String(known) },
+            { all: true },
+          )
+        : await client.changes({ changed_object_type: 'dcim.device', limit: '1' }));
     const prefixes = [];
     const missing = [];
     const seen = new Set();
     for (const entry of this.config.prefixes) {
       const found = await this.#resolve(client, entry);
-      if (found.length === 0) {
+      if (found === null || found.length === 0) {
         missing.push(entry);
         this.#warnOnce(`missing:${entry}`, `Prefix ${entry} not found in NetBox`);
         continue;
@@ -382,7 +397,8 @@ export class Hub {
     const next = { instance, lastChangeId: known?.lastChangeId ?? null, high: [] };
 
     for (const prefix of summary.prefixes) {
-      if (prefix.percent < this.config.threshold) {
+      // Rounded like the state and the widget: 89.6 % is 90 % everywhere.
+      if (Math.round(prefix.percent) < this.config.threshold) {
         continue;
       }
       if (high.has(prefix.id)) {
@@ -504,7 +520,8 @@ export class Hub {
    * @param {string} [force] external id of a device just created
    */
   async publishStates(force) {
-    if (!this.summary || this.stopped) {
+    // Without a summary (NetBox down since the start), `reachable` alone.
+    if (this.stopped || (!this.summary && this.failure === null)) {
       return;
     }
     const reachable = this.failure === null;

@@ -83,10 +83,11 @@ no list. Read only.
   deleted, empty: both). Variables: change, device, device number, user, time
   of the change. The first read after the installation is silent: past
   changes are not announced. Ten devices at most per read (a bulk import does
-  not flood the scenes).
+  not flood the scenes). A prefix already above the threshold when it is first
+  followed is announced at the first read.
 
 What was announced is saved in the data volume of the integration, so a
-restart announces nothing twice.
+restart announces nothing twice. A new NetBox address starts a new baseline.
 
 ## Scene action
 

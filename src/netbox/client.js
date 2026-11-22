@@ -188,16 +188,19 @@ export class NetBoxClient {
   }
 
   /**
-   * The latest object changes, newest first (`query` narrows them).
+   * The latest object changes, newest first (`query` narrows them); `all`
+   * reads every page instead of the first one.
    * @param {Record<string, string>} query
+   * @param {{ all?: boolean }} [options]
    */
-  async changes(query) {
+  async changes(query, { all = false } = {}) {
     const order = this.changesApp ? [this.changesApp] : ['core', 'extras'];
     for (const app of order) {
       try {
-        const data = await this.page(`/${app}/object-changes/`, query);
+        const path = `/${app}/object-changes/`;
+        const results = all ? await this.list(path, query) : (await this.page(path, query)).results;
         this.changesApp = app;
-        return data.results;
+        return results;
       } catch (err) {
         if (!(err instanceof NetBoxError && err.kind === 'not_found') || app === order.at(-1)) {
           throw err;

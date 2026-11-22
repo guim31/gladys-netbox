@@ -87,10 +87,12 @@ letzten Änderungen des Protokolls oder keine Liste. Nur lesend.
   Gerätenummer, Benutzer, Zeitpunkt der Änderung. Das erste Lesen nach der
   Installation bleibt still: Frühere Änderungen werden nicht gemeldet.
   Höchstens zehn Geräte pro Lesen (ein Massenimport überflutet die Szenen
-  nicht).
+  nicht). Ein Präfix, das schon über der Schwelle liegt, wenn es verfolgt wird,
+  wird beim ersten Lesen gemeldet.
 
 Was gemeldet wurde, wird im Datenvolume der Integration gespeichert: Ein
-Neustart meldet nichts doppelt.
+Neustart meldet nichts doppelt. Eine neue NetBox-Adresse beginnt eine neue
+Basis.
 
 ## Szenenaktion
 

@@ -4,6 +4,8 @@
 // the rest of the code never deals with strings, blanks or `undefined`.
 // -----------------------------------------------------------------------------
 
+import { parseCidr } from './netbox/model.js';
+
 export const LANGUAGES = ['en', 'fr', 'de', 'es'];
 
 export const REFRESH_MINUTES = ['5', '15', '30', '60'];
@@ -84,7 +86,7 @@ export function parsePrefixes(raw) {
     const value = entry.toLowerCase();
     const valid = /^\d+$/.test(value)
       ? Number(value) > 0
-      : /^(\d{1,3}(\.\d{1,3}){3}\/\d{1,2}|[0-9a-f:]+:[0-9a-f:.]*\/\d{1,3})$/.test(value);
+      : /^[0-9a-f:.]+\/\d{1,3}$/.test(value) && parseCidr(value) !== null;
     if (!valid) {
       invalid.push(entry);
     } else if (!prefixes.includes(value)) {

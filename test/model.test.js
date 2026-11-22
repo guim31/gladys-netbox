@@ -86,10 +86,13 @@ test('configuration: address, token, prefixes, threshold', () => {
   assert.equal(normalizeUrl('http://user:pw@example.org'), null);
   assert.equal(normalizeToken(' Token abc\n'), 'abc');
   assert.equal(normalizeToken('Bearer nbt_x.y'), 'nbt_x.y');
-  assert.deepEqual(parsePrefixes('192.0.2.0/24, 12;2001:DB8::/64 192.0.2.0/24 nope 0'), {
-    prefixes: ['192.0.2.0/24', '12', '2001:db8::/64'],
-    invalid: ['nope', '0'],
-  });
+  assert.deepEqual(
+    parsePrefixes('192.0.2.0/24, 12;2001:DB8::/64 192.0.2.0/24 nope 0 10.0.0.0/99 999.1.1.1/24'),
+    {
+      prefixes: ['192.0.2.0/24', '12', '2001:db8::/64'],
+      invalid: ['nope', '0', '10.0.0.0/99', '999.1.1.1/24'],
+    },
+  );
   const config = normalizeConfig({ url: 'x y', usage_threshold: '150', refresh_minutes: '7' });
   assert.equal(config.urlInvalid, true);
   assert.equal(config.threshold, 100);

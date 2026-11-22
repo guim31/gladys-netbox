@@ -113,9 +113,11 @@ test('trigger "Prefix almost full": once, again after going below the threshold'
   assert.equal(world.fake.sceneEvents.length, 1, 'once');
   assert.deepEqual(store.data.high, [1], 'remembered across restarts');
 
+  server.remove('ipam/ip-addresses', 50);
   server.remove('ipam/ip-addresses', 51);
   await world.hub.refresh();
   server.add('ipam/ip-addresses', ip(52, '192.0.2.22/24'));
+  server.add('ipam/ip-addresses', ip(53, '192.0.2.23/24'));
   await world.hub.refresh();
   assert.equal(world.fake.sceneEvents.length, 2, 'again after going below');
 });
@@ -345,4 +347,48 @@ test('a created device gets all its states again; a poll republishes', async (t)
   await world.fake.poll(instance);
   await settle();
   assert.ok(world.fake.states.length > count, 'poll sends the states again');
+});
+
+test('NetBox down from the start: an added instance shows it unreachable', async (t) => {
+  const server = createNetBox();
+  server.goDown();
+  const world = await createWorld({
+    server,
+    devices: [{ external_id: INSTANCE, name: 'NetBox', features: [] }],
+  });
+  t.after(() => world.app.stop());
+  assert.equal(world.fake.lastState(feature('reachable')), 0);
+  assert.equal(world.fake.discoveredDevices.length, 0);
+});
+
+test('a CIDR NetBox refuses is a missing prefix, not an outage', async (t) => {
+  const server = createNetBox();
+  const original = server.fetch;
+  server.fetch = async (url, init) =>
+    url.includes('prefix=192.0.2.0%2F24')
+      ? new Response('{"prefix": ["Enter a valid IPv4 or IPv6 address."]}', { status: 400 })
+      : original(url, init);
+  const world = await createWorld({
+    server,
+    config: { url: HOST, api_token: TOKEN, prefixes: '192.0.2.0/24, 999.1.1.1/24, 7' },
+  });
+  t.after(() => world.app.stop());
+  assert.equal(world.fake.connectionStatus.connected, true);
+  assert.deepEqual(world.hub.summary.missing, ['192.0.2.0/24']);
+  assert.deepEqual(world.hub.config.invalidPrefixes, ['999.1.1.1/24']);
+});
+
+test('a bulk edit of many devices does not hide a creation', async (t) => {
+  const server = createNetBox();
+  const world = await createWorld({ server });
+  t.after(() => world.app.stop());
+  server.change('create', 'dcim.device', 20, 'new-switch');
+  for (let i = 0; i < 1200; i += 1) {
+    server.change('update', 'dcim.device', 1, 'sw-core-01');
+  }
+  await world.hub.refresh();
+  assert.deepEqual(
+    world.fake.sceneEvents.map((e) => e.data.device),
+    ['new-switch'],
+  );
 });
