@@ -1,0 +1,278 @@
+{
+  "count": 8,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 2,
+      "url": "http://192.0.2.40:8000/api/ipam/prefixes/2/",
+      "display_url": "http://192.0.2.40:8000/ipam/prefixes/2/",
+      "display": "10.0.0.0/16",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "prefix": "10.0.0.0/16",
+      "vrf": null,
+      "scope_type": null,
+      "scope_id": null,
+      "scope": null,
+      "tenant": null,
+      "vlan": null,
+      "status": {
+        "value": "container",
+        "label": "Container"
+      },
+      "role": null,
+      "is_pool": false,
+      "mark_utilized": false,
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:38.252136Z",
+      "last_updated": "2026-11-22T11:41:38.252165Z",
+      "children": 2,
+      "_depth": 0
+    },
+    {
+      "id": 3,
+      "url": "http://192.0.2.40:8000/api/ipam/prefixes/3/",
+      "display_url": "http://192.0.2.40:8000/ipam/prefixes/3/",
+      "display": "10.0.1.0/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "prefix": "10.0.1.0/24",
+      "vrf": null,
+      "scope_type": null,
+      "scope_id": null,
+      "scope": null,
+      "tenant": null,
+      "vlan": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "is_pool": false,
+      "mark_utilized": false,
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:38.672302Z",
+      "last_updated": "2026-11-22T11:41:38.672333Z",
+      "children": 0,
+      "_depth": 1
+    },
+    {
+      "id": 4,
+      "url": "http://192.0.2.40:8000/api/ipam/prefixes/4/",
+      "display_url": "http://192.0.2.40:8000/ipam/prefixes/4/",
+      "display": "10.0.2.0/23",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "prefix": "10.0.2.0/23",
+      "vrf": null,
+      "scope_type": null,
+      "scope_id": null,
+      "scope": null,
+      "tenant": null,
+      "vlan": null,
+      "status": {
+        "value": "reserved",
+        "label": "Reserved"
+      },
+      "role": null,
+      "is_pool": false,
+      "mark_utilized": false,
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:38.935321Z",
+      "last_updated": "2026-11-22T11:41:38.935353Z",
+      "children": 0,
+      "_depth": 1
+    },
+    {
+      "id": 1,
+      "url": "http://192.0.2.40:8000/api/ipam/prefixes/1/",
+      "display_url": "http://192.0.2.40:8000/ipam/prefixes/1/",
+      "display": "192.0.2.0/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "prefix": "192.0.2.0/24",
+      "vrf": null,
+      "scope_type": null,
+      "scope_id": null,
+      "scope": null,
+      "tenant": null,
+      "vlan": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "is_pool": false,
+      "mark_utilized": false,
+      "description": "Home LAN",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:38.038109Z",
+      "last_updated": "2026-11-22T11:41:38.038134Z",
+      "children": 0,
+      "_depth": 0
+    },
+    {
+      "id": 5,
+      "url": "http://192.0.2.40:8000/api/ipam/prefixes/5/",
+      "display_url": "http://192.0.2.40:8000/ipam/prefixes/5/",
+      "display": "198.51.100.0/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "prefix": "198.51.100.0/24",
+      "vrf": null,
+      "scope_type": null,
+      "scope_id": null,
+      "scope": null,
+      "tenant": null,
+      "vlan": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "is_pool": false,
+      "mark_utilized": false,
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:39.125653Z",
+      "last_updated": "2026-11-22T11:41:39.125685Z",
+      "children": 0,
+      "_depth": 0
+    },
+    {
+      "id": 7,
+      "url": "http://192.0.2.40:8000/api/ipam/prefixes/7/",
+      "display_url": "http://192.0.2.40:8000/ipam/prefixes/7/",
+      "display": "203.0.113.0/28",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "prefix": "203.0.113.0/28",
+      "vrf": null,
+      "scope_type": null,
+      "scope_id": null,
+      "scope": null,
+      "tenant": null,
+      "vlan": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "is_pool": false,
+      "mark_utilized": true,
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:39.665095Z",
+      "last_updated": "2026-11-22T11:41:39.665144Z",
+      "children": 0,
+      "_depth": 0
+    },
+    {
+      "id": 8,
+      "url": "http://192.0.2.40:8000/api/ipam/prefixes/8/",
+      "display_url": "http://192.0.2.40:8000/ipam/prefixes/8/",
+      "display": "2001:db8::/64",
+      "family": {
+        "value": 6,
+        "label": "IPv6"
+      },
+      "prefix": "2001:db8::/64",
+      "vrf": null,
+      "scope_type": null,
+      "scope_id": null,
+      "scope": null,
+      "tenant": null,
+      "vlan": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "is_pool": false,
+      "mark_utilized": false,
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:39.929326Z",
+      "last_updated": "2026-11-22T11:41:39.929358Z",
+      "children": 0,
+      "_depth": 0
+    },
+    {
+      "id": 6,
+      "url": "http://192.0.2.40:8000/api/ipam/prefixes/6/",
+      "display_url": "http://192.0.2.40:8000/ipam/prefixes/6/",
+      "display": "198.51.100.0/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "prefix": "198.51.100.0/24",
+      "vrf": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/ipam/vrfs/1/",
+        "display": "Office",
+        "name": "Office",
+        "rd": null,
+        "description": ""
+      },
+      "scope_type": null,
+      "scope_id": null,
+      "scope": null,
+      "tenant": null,
+      "vlan": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "is_pool": false,
+      "mark_utilized": false,
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:39.376087Z",
+      "last_updated": "2026-11-22T11:41:39.376122Z",
+      "children": 0,
+      "_depth": 0
+    }
+  ]
+}

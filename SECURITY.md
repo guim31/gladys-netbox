@@ -30,6 +30,14 @@ Gladys before reporting a problem.
 
 In scope: the code of this repository and the Docker image it publishes.
 
+The integration stores in `/data` only what its scene triggers already
+announced (the number of the last device change seen, the prefixes above the
+threshold): no token, no inventory. The API token is kept by Gladys in the
+configuration of the integration, sent only to the NetBox address you enter
+(in the `Authorization` header), and never written to the logs. The
+integration talks to that address only; its one write is the journal entry
+of the scene action, which needs a token allowed to write.
+
 Out of scope: Gladys Assistant itself (see its
 [security policy](https://github.com/GladysAssistant/Gladys/security/policy)),
-and the third-party services and devices the integration talks to.
+and NetBox itself.

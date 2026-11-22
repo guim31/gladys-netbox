@@ -1,0 +1,101 @@
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "url": "http://192.0.2.40:8000/api/virtualization/virtual-machines/1/",
+      "display_url": "http://192.0.2.40:8000/virtualization/virtual-machines/1/",
+      "display": "gladys-vm",
+      "name": "gladys-vm",
+      "virtual_machine_type": null,
+      "role": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "start_on_boot": {
+        "value": "off",
+        "label": "Off"
+      },
+      "site": null,
+      "cluster": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/virtualization/clusters/1/",
+        "display": "pve",
+        "name": "pve",
+        "description": ""
+      },
+      "device": null,
+      "platform": null,
+      "primary_ip": null,
+      "primary_ip4": null,
+      "primary_ip6": null,
+      "vcpus": null,
+      "memory": null,
+      "disk": null,
+      "description": "",
+      "serial": "",
+      "tenant": null,
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "local_context_data": null,
+      "config_template": null,
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:43.291767Z",
+      "last_updated": "2026-11-22T11:41:43.291807Z",
+      "interface_count": 0,
+      "virtual_disk_count": 0,
+      "config_context": {}
+    },
+    {
+      "id": 2,
+      "url": "http://192.0.2.40:8000/api/virtualization/virtual-machines/2/",
+      "display_url": "http://192.0.2.40:8000/virtualization/virtual-machines/2/",
+      "display": "pihole-vm",
+      "name": "pihole-vm",
+      "virtual_machine_type": null,
+      "role": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "start_on_boot": {
+        "value": "off",
+        "label": "Off"
+      },
+      "site": null,
+      "cluster": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/virtualization/clusters/1/",
+        "display": "pve",
+        "name": "pve",
+        "description": ""
+      },
+      "device": null,
+      "platform": null,
+      "primary_ip": null,
+      "primary_ip4": null,
+      "primary_ip6": null,
+      "vcpus": null,
+      "memory": null,
+      "disk": null,
+      "description": "",
+      "serial": "",
+      "tenant": null,
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "local_context_data": null,
+      "config_template": null,
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:43.695052Z",
+      "last_updated": "2026-11-22T11:41:43.695090Z",
+      "interface_count": 0,
+      "virtual_disk_count": 0,
+      "config_context": {}
+    }
+  ]
+}
