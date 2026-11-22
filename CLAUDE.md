@@ -32,15 +32,20 @@ pushing.
 
 ```
 index.js                          SDK wiring only: handlers registered before connect()
-src/devices/index.js              registry of the device blueprints + dispatch helpers
-src/devices/<type>.js             one device type per file (buildDevice, onPoll, onSetValue...)
+src/app.js                        registers every SDK handler on the hub (shared with the tests)
+src/hub.js                        the link to NetBox: reads, devices, states, status, triggers, journal
+src/devices.js                    the instance device, one device per followed prefix, their states
+src/netbox/client.js              REST client (/api, Token or Bearer, paging, error kinds)
+src/netbox/model.js               CIDR arithmetic, prefix utilization (like NetBox), object changes
 src/scenes.js                     scene action handlers (manifest `scene_actions`)
 src/widgets.js                    dashboard widget handlers (manifest `widgets`)
+src/texts.js                      every text of the container, in four languages
+src/store.js                      /data/netbox-state.json: what the triggers announced
 src/config.js                     DEFAULT_CONFIG (mirrors the manifest defaults) + normalization
-src/weather.js                    example driver (Open-Meteo)
 gladys-assistant-integration.json manifest: name, config_schema, actions, image...
-docs/en.md, docs/fr.md            user documentation, re-hosted by Gladys (mandatory)
+docs/{en,fr,de,es}.md             user documentation, re-hosted by Gladys (en and fr mandatory)
 test/                             node --test, against the SDK's fake Gladys (integration-sdk/testing)
+test/fixtures/netbox/4.7.5/       answers recorded on a real NetBox 4.7.5 (demo data)
 .github/scripts/release.mjs       release helpers (manifest bump, changelog), tested in test/
 ```
 
@@ -78,8 +83,9 @@ test/                             node --test, against the SDK's fake Gladys (in
   `type: "provider"`: 5.1.0). `test/manifest.test.js` ties the manifest to the
   code (defaults, action, scene and widget handlers): change both sides
   together.
-- **User-facing text** is bilingual (English and French): action messages,
-  manifest texts, and `docs/en.md` / `docs/fr.md`, kept in sync.
+- **User-facing text** exists in English, French, German and Spanish: action
+  messages, manifest texts, widget content, feature names, and
+  `docs/{en,fr,de,es}.md`, kept in sync (`test/i18n.test.js`).
 - **Style.** Prettier formats, ESLint catches mistakes. Comments explain why,
   in English. Tests never touch the network.
 
@@ -259,3 +265,36 @@ long, et sur un « Sie »/« Ihr… » de politesse en allemand. Le store exige 
 - Docs `en`, `fr`, `de`, `es` avec les mêmes sections.
 - Chauffe, ouverture, sécurité : ne rien rendre pilotable « comme un thermostat » ou par un assistant
   vocal quand une erreur serait dangereuse (leçon d'OctoPrint).
+
+## NetBox (relevé sur un vrai serveur 4.7.5, 22/11/2026)
+
+- API REST `/api/…`. Jetons v1 (40 caractères hexadécimaux) en `Authorization: Token <jeton>` ; jetons v2
+  de la 4.5+ en `Authorization: Bearer nbt_<clé>.<secret>` (`/api/users/tokens/provision/` renvoie la clé et
+  le secret séparément). Le client choisit d'après le préfixe `nbt_`.
+- Erreurs : jeton refusé = **403** `{"detail":"Invalid v1 token"}` (ou `Invalid v2 token`) ; sans jeton =
+  403 `Authentication credentials were not provided.` ; droit manquant = **403** `You do not have
+permission to perform this action.` : seul le `detail` les distingue. Objet absent = 404 JSON `{"detail":
+"No Prefix matches the given query."}` ; chemin d'API inconnu = 404 **HTML**. Validation = 400
+  `{"champ": ["message"]}`.
+- Listes `{ count, next, previous, results }` ; `limit=1&brief=1` suffit pour un compte. Filtres vérifiés :
+  `status`, `prefix`, `within`, `parent` (adresses et plages), `vrf_id=null` (table globale),
+  `changed_object_type=dcim.device`, `name__ie` (nom sans casse). Le journal des changements est trié du
+  plus récent au plus ancien ; il est passé de `extras` à `core` en 4.1 (le client essaie `core`, puis
+  `extras` sur 404).
+- **L'API ne donne pas l'occupation d'un préfixe** : on la recalcule comme `Prefix.get_utilization()`
+  (conteneur : union des préfixes enfants de la même VRF ; sinon adresses IP + plages `mark_utilized`, sur
+  la taille moins réseau et diffusion en IPv4 < /31 hors pool ; `mark_utilized` = 100 %). Écart possible :
+  NetBox 4.7 ne compte qu'une fois une IP située dans une plage utilisée.
+- Pas d'identifiant d'instance lisible : l'appareil instance a un id fixe (`netbox:instance`) ; un préfixe
+  est identifié par son id NetBox (`netbox:prefix-<id>`), jamais par son CIDR (modifiable, et répété d'une
+  VRF à l'autre).
+- **Widget : une seule liste (`card-list`, `chart` ou `image`) par contenu**, la seconde est jetée par le
+  budget du cœur (`validateWidgetContent` le signale) : d'où le réglage `list` (préfixes, changements ou
+  aucune).
+- Pourcentage : les seules catégories en `percent` du cœur sont physiques (batterie, niveau de liquide…),
+  et une fonctionnalité seule de son type prend le libellé générique : l'occupation est un
+  `counter-sensor/integer` en `percent`, à côté du compteur d'adresses libres.
+- Installation de test : image `quay.io/netboxcommunity/netbox` + `postgres:17-alpine` + `redis:7-alpine`.
+  `DB_POOL=false` (sinon « couldn't get a connection after 30 sec ») et **1,5 Go** de mémoire pour les
+  migrations (tuées à 1 Go), ~20 min au premier démarrage sur une machine chargée. Jetons créés en
+  `nbshell` (`Token(user=…, version=1)`).

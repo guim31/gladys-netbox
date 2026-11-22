@@ -1,0 +1,132 @@
+# NetBox
+
+Verfolge dein [NetBox](https://netboxlabs.com/oss/netbox/)-Netzwerkinventar in
+Gladys: die Geräte nach Status, die IP-Adressen und virtuellen Maschinen, die
+Auslastung der Präfixe deiner Wahl, die letzten Änderungen. Eine Szene kann
+außerdem einen Journaleintrag zu einem NetBox-Gerät schreiben. Alles bleibt
+in deinem lokalen Netzwerk: Gladys spricht direkt mit deinem NetBox-Server.
+
+Getestet mit einem echten NetBox-4.7.5-Server (das offizielle
+`netbox-docker`-Image). Rückmeldungen sind im Gladys-Forum willkommen.
+
+## Voraussetzungen
+
+- Gladys Assistant 5.1 oder neuer.
+- Ein NetBox-Server, Version 3.7 bis 4.x, vom Gladys-Rechner aus erreichbar.
+- Ein API-Token: Öffne in NetBox dein Profilmenü (oben rechts), **API Tokens**,
+  dann **Add a Token**. NetBox 4.5 und neuer erstellen v2-Token (`nbt_…`), die
+  nur einmal angezeigt werden: kopiere es sofort. Ältere Versionen erstellen
+  v1-Token (40 Zeichen). Beide funktionieren. Ein schreibgeschütztes Token
+  genügt, außer für die Szenenaktion, die Journaleinträge schreibt.
+
+## Konfiguration
+
+1. Öffne den Reiter **Konfiguration** der Integration.
+2. Gib unter **NetBox-Adresse** die Adresse ein, die du im Browser öffnest, mit
+   Port, zum Beispiel `http://192.168.1.20:8000` oder
+   `https://netbox.example.org`.
+3. Füge das **API-Token** ein.
+4. **Zu verfolgende Präfixe**: Präfixe in CIDR-Schreibweise (`192.168.1.0/24`)
+   oder NetBox-Präfixnummern (die Zahl in der Adresse der Präfixseite), durch
+   Kommas getrennt, höchstens 20. Ein CIDR in mehreren VRFs ergibt ein Gerät
+   pro VRF. Leer lassen, um kein Präfix zu verfolgen.
+5. **Warnschwelle der Auslastung (%)**: Der Auslöser „Präfix fast voll“ feuert,
+   wenn ein verfolgtes Präfix sie erreicht (standardmäßig 90).
+6. **NetBox lesen alle**: 5, 15 (Standard), 30 oder 60 Minuten.
+7. **Sprache der Funktionsnamen** legt die Funktionsnamen fest (beim
+   Hinzufügen eines Geräts fixiert) und die Texte der Integration.
+   Standardmäßig Französisch.
+8. Speichere und starte dann **Verbindung testen**: Es zeigt die
+   NetBox-Version, die Zahl der Geräte, die verfolgten Präfixe und die nicht
+   gefundenen.
+9. Füge im Reiter **Erkennung** das Gerät **NetBox** und die Präfixe hinzu.
+
+## Geräte
+
+**NetBox** (ein Gerät für deinen Server):
+
+| Funktion            | Wert                                             |
+| ------------------- | ------------------------------------------------ |
+| NetBox erreichbar   | 1, wenn das letzte Lesen geklappt hat, sonst 0   |
+| NetBox-Version      | zum Beispiel `4.7.5`                             |
+| Aktive Geräte       | Geräte mit dem Status „Active“                   |
+| Offline-Geräte      | Geräte mit dem Status „Offline“                  |
+| Defekte Geräte      | Geräte mit dem Status „Failed“                   |
+| IP-Adressen         | alle IP-Adressen                                 |
+| Virtuelle Maschinen | alle virtuellen Maschinen                        |
+| Letzte Änderung     | Aktion, Objekt und Benutzer der letzten Änderung |
+
+**Präfix …** (ein Gerät pro verfolgtem Präfix):
+
+| Funktion       | Wert                                                        |
+| -------------- | ----------------------------------------------------------- |
+| Auslastung     | Prozentsatz, berechnet wie auf der Präfixseite von NetBox   |
+| Freie Adressen | nutzbare, nicht belegte Adressen (gedeckelt: 4 294 967 296) |
+
+Die Auslastung folgt NetBox: Ein Präfix zählt seine IP-Adressen und die als
+belegt markierten IP-Bereiche; ein Container zählt seine Unterpräfixe; ein
+als belegt markiertes Präfix steht auf 100 %. Ein IPv4-Präfix kürzer als /31
+verliert seine Netz- und Broadcast-Adresse, außer es ist ein Pool.
+
+## Dashboard-Widget
+
+**NetBox**: vier Kacheln (aktive Geräte, Geräte offline oder defekt,
+IP-Adressen, virtuelle Maschinen) und eine Liste, gewählt in den
+Einstellungen des Widgets: die verfolgten Präfixe, das vollste zuerst, mit
+ihrer Auslastung (rot ab der Schwelle, orange 10 Punkte darunter), die
+letzten Änderungen des Protokolls oder keine Liste. Nur lesend.
+
+## Szenenauslöser
+
+- **Präfix fast voll**: Ein verfolgtes Präfix erreicht die Auslastungsschwelle.
+  Erneut, nachdem es darunter lag. Filter: das Präfix (leer: alle). Variablen:
+  Präfix, VRF, Auslastung, freie Adressen, Schwelle.
+- **Gerät erstellt oder gelöscht**: Ein Gerät wird in NetBox erstellt oder
+  gelöscht, im Änderungsprotokoll beim nächsten Lesen erkannt. Filter: die
+  Änderung (erstellt, gelöscht, leer: beide). Variablen: Änderung, Gerät,
+  Gerätenummer, Benutzer, Zeitpunkt der Änderung. Das erste Lesen nach der
+  Installation bleibt still: Frühere Änderungen werden nicht gemeldet.
+  Höchstens zehn Geräte pro Lesen (ein Massenimport überflutet die Szenen
+  nicht).
+
+Was gemeldet wurde, wird im Datenvolume der Integration gespeichert: Ein
+Neustart meldet nichts doppelt.
+
+## Szenenaktion
+
+**NetBox-Journaleintrag hinzufügen**: schreibt einen Journaleintrag zu einem
+NetBox-Gerät, angegeben über seinen Namen (ohne Beachtung der
+Groß-/Kleinschreibung) oder seine Nummer. Art: Info (Standard), Erfolg,
+Warnung oder Gefahr. Der Text akzeptiert Szenenvariablen, zum Beispiel „USV
+auf Batterie: {{…}}“. Ergebnisse: die Nummer des Eintrags und der Name des
+Geräts. Es braucht ein Token mit Schreibrecht (in NetBox 4 das Kästchen „Write
+enabled“ des Tokens und das Recht, Journaleinträge hinzuzufügen). Ein Fehler
+(Gerät nicht gefunden, mehrere Geräte mit diesem Namen, Token ohne Recht) wird
+rot angezeigt.
+
+## Grenzen
+
+- NetBox wird in festen Abständen gelesen, nicht in Echtzeit: Eine Änderung
+  erscheint beim nächsten Lesen.
+- Ein Lesevorgang kostet etwa zehn kleine Anfragen, plus zwei oder drei pro
+  verfolgtem Präfix. NetBox setzt kein Kontingent, aber halte den Abstand auf
+  einem ausgelasteten Server vernünftig.
+- Die Auslastung addiert die IP-Adressen und die belegten Bereiche; NetBox 4.7
+  zählt eine Adresse, die in beiden steht, nur einmal. Eine Abweichung ist nur
+  möglich, wenn eine IP-Adresse in einem als belegt markierten Bereich liegt.
+- Getestet mit NetBox 4.7.5. NetBox 3.7 bis 4.6 nutzen dieselbe API (das
+  Änderungsprotokoll liegt vor 4.1 unter `/api/extras/object-changes/`): nicht
+  mit einem echten Server getestet, Rückmeldungen willkommen.
+
+## Fehlerbehebung
+
+- **Token abgelehnt**: Das Token ist falsch, abgelaufen, oder ein v2-Token
+  wurde ohne sein Präfix `nbt_` eingefügt. Erstelle ein neues.
+- **Dieses Token darf die Geräte oder die IP-Adressen nicht lesen**: Gib dem
+  Benutzer des Tokens das Recht, Geräte, IP-Adressen und Präfixe zu sehen.
+- **NetBox antwortet nicht**: Prüfe Adresse und Port vom Gladys-Rechner aus und
+  ob NetBox läuft.
+- **Ein Präfix fehlt**: „Verbindung testen“ listet die nicht gefundenen
+  Präfixe; prüfe das CIDR oder nutze die Nummer des Präfixes.
+- Protokolle: der Reiter **Protokolle** der Integration. Setze
+  `LOG_LEVEL=debug`, um jedes Lesen zu sehen.

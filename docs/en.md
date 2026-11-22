@@ -1,61 +1,126 @@
-# Demo Devices Template
+# NetBox
 
-This is the user documentation of the integration. Gladys re-hosts this file
-and shows a permanent **Documentation** link to it in the Configuration screen
-(in the user's language, with English as the fallback) — it is when
-configuring that the user needs it most. Keep the short onboarding hints in
-the `section` blocks of the manifest `config_schema`; put the long
-step-by-step (screenshots, troubleshooting…) here.
+Follow your [NetBox](https://netboxlabs.com/oss/netbox/) network inventory in
+Gladys: the devices by status, the IP addresses and virtual machines, the
+utilization of the prefixes you choose, the last changes. A scene can also
+write a journal entry on a NetBox device. Everything stays on your local
+network: Gladys talks directly to your NetBox server.
 
-## What you get
+Tested against a real NetBox 4.7.5 server (the official `netbox-docker`
+image). Feedback welcome on the Gladys forum.
 
-Six demo devices show up after installation: a weather station (real data
-from Open-Meteo), a switch, a dimmable light, a smart plug with power
-metering, a motion sensor and a camera.
+## Prerequisites
+
+- Gladys Assistant 5.1 or later.
+- A NetBox server, version 3.7 to 4.x, reachable from the Gladys machine.
+- An API token: in NetBox, open your profile menu (top right), **API Tokens**,
+  then **Add a Token**. NetBox 4.5 and later create v2 tokens (`nbt_…`), shown
+  only once: copy it at once. Older versions create v1 tokens (40
+  characters). Both work. A read-only token is enough, except for the scene
+  action that writes journal entries.
 
 ## Configuration
 
 1. Open the **Configuration** tab of the integration.
-2. Set the **latitude** and **longitude** the demo weather station should
-   observe (they default to Paris), and pick your temperature unit.
-   The **refresh interval** sets how often the weather station and the
-   plug's power are read: every 5 minutes by default, every minute at most.
-3. Save: the devices appear in the **Discovery** tab, ready to be added.
+2. In **NetBox address**, enter the address you open in your browser, with its
+   port, for example `http://192.168.1.20:8000` or `https://netbox.example.org`.
+3. Paste the **API token**.
+4. **Prefixes to follow**: prefixes in CIDR notation (`192.168.1.0/24`) or
+   NetBox prefix numbers (the number in the address of the prefix page),
+   separated by commas, 20 at most. A CIDR present in several VRFs gives one
+   device per VRF. Leave empty to follow no prefix.
+5. **Utilization alert threshold (%)**: the trigger "Prefix almost full" fires
+   when a followed prefix reaches it (90 by default).
+6. **Read NetBox every**: 5, 15 (default), 30 or 60 minutes.
+7. **Language of the feature names** sets the feature names (fixed when a
+   device is added) and the texts of the integration. French by default.
+8. Save, then use **Test the connection**: it shows the NetBox version, the
+   number of devices, the followed prefixes, and the ones not found.
+9. In the **Discovery** tab, add the **NetBox** device and the prefixes.
 
-The **Prefer the local connection** toggle drives the demo plug: it reports
-the channel it actually uses as a badge (local or cloud), with an orange dot
-when it runs degraded (local refused, cloud fallback).
+## Devices
 
-## Actions
+**NetBox** (one device for your server):
 
-- **Test the weather provider** — performs a live request to Open-Meteo and
-  shows the current temperature and humidity under the button.
-- **Identify a device** — pick one of your devices in the list and it will
-  signal itself (the demo light "blinks" in the logs).
+| Feature          | Value                                                 |
+| ---------------- | ----------------------------------------------------- |
+| NetBox reachable | 1 when the last read worked, 0 otherwise              |
+| NetBox version   | for example `4.7.5`                                   |
+| Active devices   | devices with the status "Active"                      |
+| Offline devices  | devices with the status "Offline"                     |
+| Failed devices   | devices with the status "Failed"                      |
+| IP addresses     | all the IP addresses                                  |
+| Virtual machines | all the virtual machines                              |
+| Last change      | action, object and user of the last change of the log |
 
-## Scenes
+**Prefix …** (one device per followed prefix):
 
-The integration adds its own cards to the scene editor (Gladys 5.1 or
-later), under the **Integrations** category:
+| Feature        | Value                                               |
+| -------------- | --------------------------------------------------- |
+| Utilization    | percentage, computed like the NetBox prefix page    |
+| Free addresses | usable addresses not used (capped at 4 294 967 296) |
 
-- **Motion detected** (trigger) — starts the scene when a demo motion sensor
-  sees something move. Optionally pick the sensor and what moved (person,
-  animal); left empty, any detection matches. The following actions can
-  read what moved with `{{triggerEvent.data.target}}`.
-- **Identify a device** (action) — makes the chosen device signal itself.
-  It returns whether the device could signal itself, so the following
-  actions can depend on it.
+The utilization follows NetBox: a prefix counts its IP addresses and the IP
+ranges marked as utilized; a container counts its child prefixes; a prefix
+marked as utilized is at 100 %. An IPv4 prefix shorter than /31 loses its
+network and broadcast addresses, unless it is a pool.
 
-## Dashboard
+## Dashboard widget
 
-Add the **Demo status** widget to a dashboard: it shows the live
-temperature of the weather station and the power of the office plug, the
-connection the plug currently uses (orange when degraded) and the observed
-location. Its **Identify the light** button makes the demo light signal
-itself.
+**NetBox**: four tiles (active devices, devices offline or failed, IP
+addresses, virtual machines) and one list, chosen in the settings of the
+widget: the followed prefixes, the fullest first, with their utilization (red
+from the threshold, orange 10 points below), the last changes of the log, or
+no list. Read only.
+
+## Scene triggers
+
+- **Prefix almost full**: a followed prefix reaches the utilization threshold.
+  Announced again once it went below. Filter: the prefix (empty: any).
+  Variables: prefix, VRF, utilization, free addresses, threshold.
+- **Device created or deleted**: a device is created or deleted in NetBox,
+  seen in the change log at the next read. Filter: the change (created,
+  deleted, empty: both). Variables: change, device, device number, user, time
+  of the change. The first read after the installation is silent: past
+  changes are not announced. Ten devices at most per read (a bulk import does
+  not flood the scenes).
+
+What was announced is saved in the data volume of the integration, so a
+restart announces nothing twice.
+
+## Scene action
+
+**Add a NetBox journal entry**: writes a journal entry on a NetBox device,
+given by its name (case-insensitive) or its number. Kind: info (default),
+success, warning or danger. The text accepts scene variables, for example
+"UPS on battery: {{…}}". Outputs: the number of the entry and the name of the
+device. It needs a token allowed to write (in NetBox 4, the "Write enabled"
+box of the token, and the permission to add journal entries). A failure (no
+such device, several devices with that name, token not allowed) is shown in
+red.
+
+## Limits
+
+- NetBox is read on a timer, not in real time: a change shows at the next read.
+- A read costs about ten small requests, plus two or three per followed
+  prefix. NetBox sets no quota, but keep the interval reasonable on a busy
+  server.
+- The utilization adds the IP addresses and the utilized ranges; NetBox 4.7
+  counts an address that is in both only once. A difference is possible only
+  when an IP address is declared inside a range marked as utilized.
+- Tested on NetBox 4.7.5. NetBox 3.7 to 4.6 use the same API (the change log
+  is read at `/api/extras/object-changes/` before 4.1): not tested on a real
+  server, feedback welcome.
 
 ## Troubleshooting
 
-The integration logs everything it does: check the integration logs from the
-Gladys UI (or `docker logs` on the host) with `LOG_LEVEL=debug` for the full
-detail.
+- **Token refused**: the token is wrong, expired, or a v2 token was pasted
+  without its `nbt_` prefix. Create a new one.
+- **This token may not read the devices or the IP addresses**: give the user
+  of the token the permission to view devices, IP addresses and prefixes.
+- **NetBox does not answer**: check the address and the port from the Gladys
+  machine, and that NetBox is running.
+- **A prefix is missing**: "Test the connection" lists the prefixes not found;
+  check the CIDR or use the number of the prefix.
+- Logs: the **Logs** tab of the integration. Set `LOG_LEVEL=debug` for every
+  read.

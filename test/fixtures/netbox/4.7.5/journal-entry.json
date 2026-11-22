@@ -1,0 +1,25 @@
+{
+  "id": 1,
+  "url": "http://192.0.2.40:8000/api/extras/journal-entries/1/",
+  "display_url": "http://192.0.2.40:8000/extras/journal-entries/1/",
+  "display": "2026-11-22 11:42 (Warning)",
+  "assigned_object_type": "dcim.device",
+  "assigned_object_id": 4,
+  "assigned_object": {
+    "id": 4,
+    "url": "http://192.0.2.40:8000/api/dcim/devices/4/",
+    "display": "ups-rack1",
+    "name": "ups-rack1",
+    "description": ""
+  },
+  "created": "2026-11-22T11:42:10.269873Z",
+  "created_by": 1,
+  "kind": {
+    "value": "warning",
+    "label": "Warning"
+  },
+  "comments": "UPS on battery",
+  "tags": [],
+  "custom_fields": {},
+  "last_updated": "2026-11-22T11:42:10.269900Z"
+}

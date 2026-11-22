@@ -1,0 +1,300 @@
+{
+  "count": 9,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 5,
+      "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/5/",
+      "display_url": "http://192.0.2.40:8000/ipam/ip-addresses/5/",
+      "display": "10.0.1.1/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "address": "10.0.1.1/24",
+      "vrf": null,
+      "tenant": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "assigned_object_type": null,
+      "assigned_object_id": null,
+      "assigned_object": null,
+      "nat_inside": null,
+      "nat_outside": [],
+      "dns_name": "",
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:41.275375Z",
+      "last_updated": "2026-11-22T11:41:41.275410Z"
+    },
+    {
+      "id": 1,
+      "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/1/",
+      "display_url": "http://192.0.2.40:8000/ipam/ip-addresses/1/",
+      "display": "192.0.2.1/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "address": "192.0.2.1/24",
+      "vrf": null,
+      "tenant": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "assigned_object_type": null,
+      "assigned_object_id": null,
+      "assigned_object": null,
+      "nat_inside": null,
+      "nat_outside": [],
+      "dns_name": "",
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:40.256436Z",
+      "last_updated": "2026-11-22T11:41:40.256467Z"
+    },
+    {
+      "id": 2,
+      "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/2/",
+      "display_url": "http://192.0.2.40:8000/ipam/ip-addresses/2/",
+      "display": "192.0.2.2/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "address": "192.0.2.2/24",
+      "vrf": null,
+      "tenant": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "assigned_object_type": null,
+      "assigned_object_id": null,
+      "assigned_object": null,
+      "nat_inside": null,
+      "nat_outside": [],
+      "dns_name": "",
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:40.518232Z",
+      "last_updated": "2026-11-22T11:41:40.518268Z"
+    },
+    {
+      "id": 3,
+      "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/3/",
+      "display_url": "http://192.0.2.40:8000/ipam/ip-addresses/3/",
+      "display": "192.0.2.10/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "address": "192.0.2.10/24",
+      "vrf": null,
+      "tenant": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "assigned_object_type": null,
+      "assigned_object_id": null,
+      "assigned_object": null,
+      "nat_inside": null,
+      "nat_outside": [],
+      "dns_name": "",
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:40.812809Z",
+      "last_updated": "2026-11-22T11:41:40.812855Z"
+    },
+    {
+      "id": 4,
+      "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/4/",
+      "display_url": "http://192.0.2.40:8000/ipam/ip-addresses/4/",
+      "display": "192.0.2.11/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "address": "192.0.2.11/24",
+      "vrf": null,
+      "tenant": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "assigned_object_type": null,
+      "assigned_object_id": null,
+      "assigned_object": null,
+      "nat_inside": null,
+      "nat_outside": [],
+      "dns_name": "",
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:41.069231Z",
+      "last_updated": "2026-11-22T11:41:41.069275Z"
+    },
+    {
+      "id": 6,
+      "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/6/",
+      "display_url": "http://192.0.2.40:8000/ipam/ip-addresses/6/",
+      "display": "198.51.100.5/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "address": "198.51.100.5/24",
+      "vrf": null,
+      "tenant": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "assigned_object_type": null,
+      "assigned_object_id": null,
+      "assigned_object": null,
+      "nat_inside": null,
+      "nat_outside": [],
+      "dns_name": "",
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:41.535358Z",
+      "last_updated": "2026-11-22T11:41:41.535389Z"
+    },
+    {
+      "id": 7,
+      "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/7/",
+      "display_url": "http://192.0.2.40:8000/ipam/ip-addresses/7/",
+      "display": "198.51.100.5/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "address": "198.51.100.5/24",
+      "vrf": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/ipam/vrfs/1/",
+        "display": "Office",
+        "name": "Office",
+        "rd": null,
+        "description": ""
+      },
+      "tenant": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "assigned_object_type": null,
+      "assigned_object_id": null,
+      "assigned_object": null,
+      "nat_inside": null,
+      "nat_outside": [],
+      "dns_name": "",
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:41.708310Z",
+      "last_updated": "2026-11-22T11:41:41.708336Z"
+    },
+    {
+      "id": 8,
+      "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/8/",
+      "display_url": "http://192.0.2.40:8000/ipam/ip-addresses/8/",
+      "display": "198.51.100.6/24",
+      "family": {
+        "value": 4,
+        "label": "IPv4"
+      },
+      "address": "198.51.100.6/24",
+      "vrf": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/ipam/vrfs/1/",
+        "display": "Office",
+        "name": "Office",
+        "rd": null,
+        "description": ""
+      },
+      "tenant": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "assigned_object_type": null,
+      "assigned_object_id": null,
+      "assigned_object": null,
+      "nat_inside": null,
+      "nat_outside": [],
+      "dns_name": "",
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:41.902131Z",
+      "last_updated": "2026-11-22T11:41:41.902160Z"
+    },
+    {
+      "id": 9,
+      "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/9/",
+      "display_url": "http://192.0.2.40:8000/ipam/ip-addresses/9/",
+      "display": "2001:db8::1/64",
+      "family": {
+        "value": 6,
+        "label": "IPv6"
+      },
+      "address": "2001:db8::1/64",
+      "vrf": null,
+      "tenant": null,
+      "status": {
+        "value": "active",
+        "label": "Active"
+      },
+      "role": null,
+      "assigned_object_type": null,
+      "assigned_object_id": null,
+      "assigned_object": null,
+      "nat_inside": null,
+      "nat_outside": [],
+      "dns_name": "",
+      "description": "",
+      "owner": null,
+      "comments": "",
+      "tags": [],
+      "custom_fields": {},
+      "created": "2026-11-22T11:41:42.130499Z",
+      "last_updated": "2026-11-22T11:41:42.130543Z"
+    }
+  ]
+}

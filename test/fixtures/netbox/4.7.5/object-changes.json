@@ -1,0 +1,1101 @@
+{
+  "count": 33,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 33,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/33/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/33/",
+      "display": "Virtualization | virtual machine pihole-vm created by admin",
+      "time": "2026-11-22T11:41:43.712511Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "96ff0236-c4ad-4b08-9920-a886a7a5fd59",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "virtualization.virtualmachine",
+      "changed_object_id": 2,
+      "changed_object": {
+        "id": 2,
+        "url": "http://192.0.2.40:8000/api/virtualization/virtual-machines/2/",
+        "display": "pihole-vm",
+        "name": "pihole-vm",
+        "description": ""
+      },
+      "object_repr": "pihole-vm",
+      "message": ""
+    },
+    {
+      "id": 32,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/32/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/32/",
+      "display": "Virtualization | virtual machine gladys-vm created by admin",
+      "time": "2026-11-22T11:41:43.310353Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "efb96aac-efd6-4fff-8d04-49fe63b49814",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "virtualization.virtualmachine",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/virtualization/virtual-machines/1/",
+        "display": "gladys-vm",
+        "name": "gladys-vm",
+        "description": ""
+      },
+      "object_repr": "gladys-vm",
+      "message": ""
+    },
+    {
+      "id": 31,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/31/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/31/",
+      "display": "Virtualization | cluster pve created by admin",
+      "time": "2026-11-22T11:41:42.858209Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "6d275bc4-02e7-40ec-a476-0bdf412f8993",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "virtualization.cluster",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/virtualization/clusters/1/",
+        "display": "pve",
+        "name": "pve",
+        "description": ""
+      },
+      "object_repr": "pve",
+      "message": ""
+    },
+    {
+      "id": 30,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/30/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/30/",
+      "display": "Virtualization | cluster type Proxmox created by admin",
+      "time": "2026-11-22T11:41:42.627761Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "54b3ea70-1360-4d3b-83dd-28ea256248a2",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "virtualization.clustertype",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/virtualization/cluster-types/1/",
+        "display": "Proxmox",
+        "name": "Proxmox",
+        "slug": "proxmox",
+        "description": ""
+      },
+      "object_repr": "Proxmox",
+      "message": ""
+    },
+    {
+      "id": 29,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/29/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/29/",
+      "display": "IPAM | IP range 192.0.2.200-209/24 created by admin",
+      "time": "2026-11-22T11:41:42.501165Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "a302f997-2b73-4e4d-acd9-615f43f152ec",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.iprange",
+      "changed_object_id": 2,
+      "changed_object": {
+        "id": 2,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-ranges/2/",
+        "display": "192.0.2.200-209/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "start_address": "192.0.2.200/24",
+        "end_address": "192.0.2.209/24",
+        "description": ""
+      },
+      "object_repr": "192.0.2.200-209/24",
+      "message": ""
+    },
+    {
+      "id": 28,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/28/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/28/",
+      "display": "IPAM | IP range 192.0.2.100-149/24 created by admin",
+      "time": "2026-11-22T11:41:42.367498Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "34850294-98cf-4463-8e28-68165f47c097",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.iprange",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-ranges/1/",
+        "display": "192.0.2.100-149/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "start_address": "192.0.2.100/24",
+        "end_address": "192.0.2.149/24",
+        "description": "DHCP"
+      },
+      "object_repr": "192.0.2.100-149/24",
+      "message": ""
+    },
+    {
+      "id": 27,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/27/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/27/",
+      "display": "IPAM | IP address 2001:db8::1/64 created by admin",
+      "time": "2026-11-22T11:41:42.148030Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "66e67d6e-8e22-41ab-836c-221a337f80b4",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.ipaddress",
+      "changed_object_id": 9,
+      "changed_object": {
+        "id": 9,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/9/",
+        "display": "2001:db8::1/64",
+        "family": {
+          "value": 6,
+          "label": "IPv6"
+        },
+        "address": "2001:db8::1/64",
+        "description": ""
+      },
+      "object_repr": "2001:db8::1/64",
+      "message": ""
+    },
+    {
+      "id": 26,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/26/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/26/",
+      "display": "IPAM | IP address 198.51.100.6/24 created by admin",
+      "time": "2026-11-22T11:41:41.927550Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "1097dca5-6b76-4116-846c-491d05409042",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.ipaddress",
+      "changed_object_id": 8,
+      "changed_object": {
+        "id": 8,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/8/",
+        "display": "198.51.100.6/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "address": "198.51.100.6/24",
+        "description": ""
+      },
+      "object_repr": "198.51.100.6/24",
+      "message": ""
+    },
+    {
+      "id": 25,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/25/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/25/",
+      "display": "IPAM | IP address 198.51.100.5/24 created by admin",
+      "time": "2026-11-22T11:41:41.719582Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "e23483c1-a969-4505-9c2f-a1ddfcc11001",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.ipaddress",
+      "changed_object_id": 7,
+      "changed_object": {
+        "id": 7,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/7/",
+        "display": "198.51.100.5/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "address": "198.51.100.5/24",
+        "description": ""
+      },
+      "object_repr": "198.51.100.5/24",
+      "message": ""
+    },
+    {
+      "id": 24,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/24/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/24/",
+      "display": "IPAM | IP address 198.51.100.5/24 created by admin",
+      "time": "2026-11-22T11:41:41.548159Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "31df7cc5-8746-4a5b-9eac-cb4d5adfdcf4",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.ipaddress",
+      "changed_object_id": 6,
+      "changed_object": {
+        "id": 6,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/6/",
+        "display": "198.51.100.5/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "address": "198.51.100.5/24",
+        "description": ""
+      },
+      "object_repr": "198.51.100.5/24",
+      "message": ""
+    },
+    {
+      "id": 23,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/23/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/23/",
+      "display": "IPAM | IP address 10.0.1.1/24 created by admin",
+      "time": "2026-11-22T11:41:41.299458Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "10c74b41-491f-4758-9e6f-b39aaed2506c",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.ipaddress",
+      "changed_object_id": 5,
+      "changed_object": {
+        "id": 5,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/5/",
+        "display": "10.0.1.1/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "address": "10.0.1.1/24",
+        "description": ""
+      },
+      "object_repr": "10.0.1.1/24",
+      "message": ""
+    },
+    {
+      "id": 22,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/22/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/22/",
+      "display": "IPAM | IP address 192.0.2.11/24 created by admin",
+      "time": "2026-11-22T11:41:41.085213Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "009b2f5c-9704-46aa-ab05-51ddffec7fb0",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.ipaddress",
+      "changed_object_id": 4,
+      "changed_object": {
+        "id": 4,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/4/",
+        "display": "192.0.2.11/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "address": "192.0.2.11/24",
+        "description": ""
+      },
+      "object_repr": "192.0.2.11/24",
+      "message": ""
+    },
+    {
+      "id": 21,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/21/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/21/",
+      "display": "IPAM | IP address 192.0.2.10/24 created by admin",
+      "time": "2026-11-22T11:41:40.827929Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "32d13e5e-39bc-4f50-aa31-ff6207d8f41b",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.ipaddress",
+      "changed_object_id": 3,
+      "changed_object": {
+        "id": 3,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/3/",
+        "display": "192.0.2.10/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "address": "192.0.2.10/24",
+        "description": ""
+      },
+      "object_repr": "192.0.2.10/24",
+      "message": ""
+    },
+    {
+      "id": 20,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/20/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/20/",
+      "display": "IPAM | IP address 192.0.2.2/24 created by admin",
+      "time": "2026-11-22T11:41:40.534193Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "e17fd28b-43ae-470f-aca0-1a8413a988d9",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.ipaddress",
+      "changed_object_id": 2,
+      "changed_object": {
+        "id": 2,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/2/",
+        "display": "192.0.2.2/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "address": "192.0.2.2/24",
+        "description": ""
+      },
+      "object_repr": "192.0.2.2/24",
+      "message": ""
+    },
+    {
+      "id": 19,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/19/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/19/",
+      "display": "IPAM | IP address 192.0.2.1/24 created by admin",
+      "time": "2026-11-22T11:41:40.290811Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "a731de91-fef5-464b-adbf-eb30f148b354",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.ipaddress",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/ipam/ip-addresses/1/",
+        "display": "192.0.2.1/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "address": "192.0.2.1/24",
+        "description": ""
+      },
+      "object_repr": "192.0.2.1/24",
+      "message": ""
+    },
+    {
+      "id": 18,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/18/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/18/",
+      "display": "IPAM | prefix 2001:db8::/64 created by admin",
+      "time": "2026-11-22T11:41:39.943438Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "3c0a0015-6a20-45b5-af3e-408d256ff849",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.prefix",
+      "changed_object_id": 8,
+      "changed_object": {
+        "id": 8,
+        "url": "http://192.0.2.40:8000/api/ipam/prefixes/8/",
+        "display": "2001:db8::/64",
+        "family": {
+          "value": 6,
+          "label": "IPv6"
+        },
+        "prefix": "2001:db8::/64",
+        "description": "",
+        "_depth": 0
+      },
+      "object_repr": "2001:db8::/64",
+      "message": ""
+    },
+    {
+      "id": 17,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/17/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/17/",
+      "display": "IPAM | prefix 203.0.113.0/28 created by admin",
+      "time": "2026-11-22T11:41:39.694155Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "1627ef74-5259-4340-81e0-d088526992d3",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.prefix",
+      "changed_object_id": 7,
+      "changed_object": {
+        "id": 7,
+        "url": "http://192.0.2.40:8000/api/ipam/prefixes/7/",
+        "display": "203.0.113.0/28",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "prefix": "203.0.113.0/28",
+        "description": "",
+        "_depth": 0
+      },
+      "object_repr": "203.0.113.0/28",
+      "message": ""
+    },
+    {
+      "id": 16,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/16/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/16/",
+      "display": "IPAM | prefix 198.51.100.0/24 created by admin",
+      "time": "2026-11-22T11:41:39.400642Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "46dd3f1e-a74a-43a5-8dcc-04751a9c0021",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.prefix",
+      "changed_object_id": 6,
+      "changed_object": {
+        "id": 6,
+        "url": "http://192.0.2.40:8000/api/ipam/prefixes/6/",
+        "display": "198.51.100.0/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "prefix": "198.51.100.0/24",
+        "description": "",
+        "_depth": 0
+      },
+      "object_repr": "198.51.100.0/24",
+      "message": ""
+    },
+    {
+      "id": 15,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/15/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/15/",
+      "display": "IPAM | prefix 198.51.100.0/24 created by admin",
+      "time": "2026-11-22T11:41:39.139384Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "0861ed85-efc7-4e77-b2cc-1648bd22723a",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.prefix",
+      "changed_object_id": 5,
+      "changed_object": {
+        "id": 5,
+        "url": "http://192.0.2.40:8000/api/ipam/prefixes/5/",
+        "display": "198.51.100.0/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "prefix": "198.51.100.0/24",
+        "description": "",
+        "_depth": 0
+      },
+      "object_repr": "198.51.100.0/24",
+      "message": ""
+    },
+    {
+      "id": 14,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/14/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/14/",
+      "display": "IPAM | prefix 10.0.2.0/23 created by admin",
+      "time": "2026-11-22T11:41:38.948743Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "fbe0e989-f8b4-4f73-b5aa-3ecdcbf32ab2",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.prefix",
+      "changed_object_id": 4,
+      "changed_object": {
+        "id": 4,
+        "url": "http://192.0.2.40:8000/api/ipam/prefixes/4/",
+        "display": "10.0.2.0/23",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "prefix": "10.0.2.0/23",
+        "description": "",
+        "_depth": 1
+      },
+      "object_repr": "10.0.2.0/23",
+      "message": ""
+    },
+    {
+      "id": 13,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/13/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/13/",
+      "display": "IPAM | prefix 10.0.1.0/24 created by admin",
+      "time": "2026-11-22T11:41:38.692066Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "3bdf4266-7ce7-438c-9144-c4db60cf62bf",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.prefix",
+      "changed_object_id": 3,
+      "changed_object": {
+        "id": 3,
+        "url": "http://192.0.2.40:8000/api/ipam/prefixes/3/",
+        "display": "10.0.1.0/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "prefix": "10.0.1.0/24",
+        "description": "",
+        "_depth": 1
+      },
+      "object_repr": "10.0.1.0/24",
+      "message": ""
+    },
+    {
+      "id": 12,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/12/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/12/",
+      "display": "IPAM | prefix 10.0.0.0/16 created by admin",
+      "time": "2026-11-22T11:41:38.283646Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "23d628ee-7230-4b76-a821-8f3efc439f8a",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.prefix",
+      "changed_object_id": 2,
+      "changed_object": {
+        "id": 2,
+        "url": "http://192.0.2.40:8000/api/ipam/prefixes/2/",
+        "display": "10.0.0.0/16",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "prefix": "10.0.0.0/16",
+        "description": "",
+        "_depth": 0
+      },
+      "object_repr": "10.0.0.0/16",
+      "message": ""
+    },
+    {
+      "id": 11,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/11/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/11/",
+      "display": "IPAM | prefix 192.0.2.0/24 created by admin",
+      "time": "2026-11-22T11:41:38.053721Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "47d544ec-f009-4806-b1ba-b5e1cb9d6e67",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.prefix",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/ipam/prefixes/1/",
+        "display": "192.0.2.0/24",
+        "family": {
+          "value": 4,
+          "label": "IPv4"
+        },
+        "prefix": "192.0.2.0/24",
+        "description": "Home LAN",
+        "_depth": 0
+      },
+      "object_repr": "192.0.2.0/24",
+      "message": ""
+    },
+    {
+      "id": 10,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/10/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/10/",
+      "display": "IPAM | VRF Office created by admin",
+      "time": "2026-11-22T11:41:37.681665Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "fd23ec4d-6308-4bda-8cd1-ff21b287392d",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "ipam.vrf",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/ipam/vrfs/1/",
+        "display": "Office",
+        "name": "Office",
+        "rd": null,
+        "description": ""
+      },
+      "object_repr": "Office",
+      "message": ""
+    },
+    {
+      "id": 9,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/9/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/9/",
+      "display": "DCIM | device router-02 created by admin",
+      "time": "2026-11-22T11:41:37.290788Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "2f195aa2-facb-452c-9d87-1f78d581bf9c",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "dcim.device",
+      "changed_object_id": 5,
+      "changed_object": {
+        "id": 5,
+        "url": "http://192.0.2.40:8000/api/dcim/devices/5/",
+        "display": "router-02",
+        "name": "router-02",
+        "description": ""
+      },
+      "object_repr": "router-02",
+      "message": ""
+    },
+    {
+      "id": 8,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/8/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/8/",
+      "display": "DCIM | device ups-rack1 created by admin",
+      "time": "2026-11-22T11:41:36.822798Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "7dbee380-266e-4d9d-b158-c049e4169207",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "dcim.device",
+      "changed_object_id": 4,
+      "changed_object": {
+        "id": 4,
+        "url": "http://192.0.2.40:8000/api/dcim/devices/4/",
+        "display": "ups-rack1",
+        "name": "ups-rack1",
+        "description": ""
+      },
+      "object_repr": "ups-rack1",
+      "message": ""
+    },
+    {
+      "id": 7,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/7/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/7/",
+      "display": "DCIM | device nas-01 created by admin",
+      "time": "2026-11-22T11:41:36.365699Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "4e70b05a-46f0-4121-9348-cdc311e1f6e4",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "dcim.device",
+      "changed_object_id": 3,
+      "changed_object": {
+        "id": 3,
+        "url": "http://192.0.2.40:8000/api/dcim/devices/3/",
+        "display": "nas-01",
+        "name": "nas-01",
+        "description": ""
+      },
+      "object_repr": "nas-01",
+      "message": ""
+    },
+    {
+      "id": 6,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/6/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/6/",
+      "display": "DCIM | device ap-living-room created by admin",
+      "time": "2026-11-22T11:41:35.710082Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "0cad50bc-96e3-49cb-acab-cf8dcaab53dd",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "dcim.device",
+      "changed_object_id": 2,
+      "changed_object": {
+        "id": 2,
+        "url": "http://192.0.2.40:8000/api/dcim/devices/2/",
+        "display": "ap-living-room",
+        "name": "ap-living-room",
+        "description": ""
+      },
+      "object_repr": "ap-living-room",
+      "message": ""
+    },
+    {
+      "id": 5,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/5/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/5/",
+      "display": "DCIM | device sw-core-01 created by admin",
+      "time": "2026-11-22T11:41:34.737423Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "c100ceee-8430-46b3-9cbc-af771f7bc33d",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "dcim.device",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/dcim/devices/1/",
+        "display": "sw-core-01",
+        "name": "sw-core-01",
+        "description": ""
+      },
+      "object_repr": "sw-core-01",
+      "message": ""
+    },
+    {
+      "id": 4,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/4/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/4/",
+      "display": "DCIM | device role Network created by admin",
+      "time": "2026-11-22T11:41:34.315779Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "f576bb18-f5f5-447a-9144-1ccefff3e16b",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "dcim.devicerole",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/dcim/device-roles/1/",
+        "display": "Network",
+        "name": "Network",
+        "slug": "network",
+        "description": "",
+        "device_count": 0,
+        "virtualmachine_count": 0,
+        "_depth": 0
+      },
+      "object_repr": "Network",
+      "message": ""
+    },
+    {
+      "id": 3,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/3/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/3/",
+      "display": "DCIM | device type Box created by admin",
+      "time": "2026-11-22T11:41:34.014682Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "e5adedc2-76c9-4918-bd03-6109c5f36f29",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "dcim.devicetype",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/dcim/device-types/1/",
+        "display": "Box",
+        "manufacturer": {
+          "id": 1,
+          "url": "http://192.0.2.40:8000/api/dcim/manufacturers/1/",
+          "display": "Generic",
+          "name": "Generic",
+          "slug": "generic",
+          "description": ""
+        },
+        "model": "Box",
+        "slug": "box",
+        "description": "",
+        "device_count": 5
+      },
+      "object_repr": "Box",
+      "message": ""
+    },
+    {
+      "id": 2,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/2/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/2/",
+      "display": "DCIM | manufacturer Generic created by admin",
+      "time": "2026-11-22T11:41:33.501266Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "99026af4-31f3-477a-8c1b-023c90a90da1",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "dcim.manufacturer",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/dcim/manufacturers/1/",
+        "display": "Generic",
+        "name": "Generic",
+        "slug": "generic",
+        "description": ""
+      },
+      "object_repr": "Generic",
+      "message": ""
+    },
+    {
+      "id": 1,
+      "url": "http://192.0.2.40:8000/api/core/object-changes/1/",
+      "display_url": "http://192.0.2.40:8000/core/changelog/1/",
+      "display": "DCIM | site Lab created by admin",
+      "time": "2026-11-22T11:41:32.660917Z",
+      "user": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/users/users/1/",
+        "display": "admin",
+        "username": "admin"
+      },
+      "user_name": "admin",
+      "request_id": "b14164a6-5dc9-46ba-8d3b-9ef4324392eb",
+      "action": {
+        "value": "create",
+        "label": "Created"
+      },
+      "changed_object_type": "dcim.site",
+      "changed_object_id": 1,
+      "changed_object": {
+        "id": 1,
+        "url": "http://192.0.2.40:8000/api/dcim/sites/1/",
+        "display": "Lab",
+        "name": "Lab",
+        "slug": "lab",
+        "description": ""
+      },
+      "object_repr": "Lab",
+      "message": ""
+    }
+  ]
+}

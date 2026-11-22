@@ -1,177 +1,609 @@
 {
   "manifest_version": 1,
   "type": "device",
-  "name": "Demo Devices Template",
+  "name": "NetBox",
   "description": {
-    "en": "Starter template showing sensors, a switch, a dimmable light and a smart plug.",
-    "fr": "Template de démarrage : capteurs, interrupteur, lampe variable et prise connectée."
+    "en": "NetBox in Gladys: devices by status, IP addresses, prefix utilization, changes.",
+    "fr": "NetBox dans Gladys : équipements par statut, adresses IP, occupation des préfixes, changements.",
+    "de": "NetBox in Gladys: Geräte nach Status, IP-Adressen, Auslastung der Präfixe, Änderungen.",
+    "es": "NetBox en Gladys: dispositivos por estado, direcciones IP, ocupación de prefijos, cambios."
   },
   "version": "1.0.0",
-  "docker_image": "ghcr.io/gladysassistant/integration-template-js:1.0.0",
+  "docker_image": "ghcr.io/guim31/gladys-netbox:1.0.0",
   "gladys_version": ">=5.1.0",
-  "cover_image": "https://raw.githubusercontent.com/GladysAssistant/integration-template-js/master/cover.png",
-  "categories": ["lighting", "security", "environment"],
-  "transports": ["local", "cloud"],
+  "cover_image": "https://raw.githubusercontent.com/guim31/gladys-netbox/main/cover.png",
+  "categories": ["services"],
+  "transports": ["local"],
   "config_schema": [
     {
       "key": "intro",
       "type": "section",
-      "label": { "en": "Getting started", "fr": "Pour commencer" },
+      "label": {
+        "en": "Connect NetBox",
+        "fr": "Connecter NetBox",
+        "de": "NetBox verbinden",
+        "es": "Conectar NetBox"
+      },
       "description": {
-        "en": "The demo weather station reads real data from the free Open-Meteo API: pick the coordinates to observe. No account, no API key.",
-        "fr": "La station météo de démonstration lit de vraies données via l'API gratuite Open-Meteo : choisissez les coordonnées à observer. Pas de compte, pas de clé d'API."
+        "en": "Enter the address of your NetBox server and an API token: in NetBox, open your profile menu, API Tokens, then Add a Token. A read-only token is enough, except for the scene action that adds journal entries, which needs a token with write access. NetBox 3.7 to 4.x.",
+        "fr": "Saisissez l'adresse de votre serveur NetBox et un jeton d'API : dans NetBox, ouvrez le menu de votre profil, API Tokens, puis Add a Token. Un jeton en lecture seule suffit, sauf pour l'action de scène qui ajoute des entrées de journal : elle demande un jeton autorisé en écriture. NetBox 3.7 à 4.x.",
+        "de": "Gib die Adresse deines NetBox-Servers und ein API-Token ein: Öffne in NetBox dein Profilmenü, API Tokens, dann Add a Token. Ein schreibgeschütztes Token genügt, außer für die Szenenaktion, die Journaleinträge hinzufügt: Dafür braucht es ein Token mit Schreibrecht. NetBox 3.7 bis 4.x.",
+        "es": "Introduzca la dirección de su servidor NetBox y un token de API: en NetBox, abra el menú de su perfil, API Tokens y luego Add a Token. Basta un token de solo lectura, salvo para la acción de escena que añade entradas al diario, que necesita un token con permiso de escritura. NetBox 3.7 a 4.x."
       },
       "links": [
         {
-          "url": "https://open-meteo.com/en/docs",
-          "label": { "en": "Open-Meteo documentation", "fr": "Documentation Open-Meteo" }
+          "url": "https://netboxlabs.com/docs/netbox/integrations/rest-api/#authentication",
+          "label": {
+            "en": "NetBox API tokens",
+            "fr": "Jetons d'API NetBox",
+            "de": "NetBox-API-Tokens",
+            "es": "Tokens de API de NetBox"
+          }
         }
       ]
     },
     {
-      "key": "latitude",
-      "type": "number",
-      "label": { "en": "Latitude", "fr": "Latitude" },
-      "description": {
-        "en": "Latitude used for the demo weather sensor.",
-        "fr": "Latitude utilisée par le capteur météo de démonstration."
+      "key": "url",
+      "type": "string",
+      "label": {
+        "en": "NetBox address",
+        "fr": "Adresse de NetBox",
+        "de": "NetBox-Adresse",
+        "es": "Dirección de NetBox"
       },
-      "placeholder": { "en": "e.g. 48.8566", "fr": "ex. 48.8566" },
-      "required": true,
-      "default": 48.8566,
-      "min": -90,
-      "max": 90
+      "description": {
+        "en": "The address you open NetBox at, with its port if any.",
+        "fr": "L'adresse à laquelle vous ouvrez NetBox, avec son port s'il y en a un.",
+        "de": "Die Adresse, unter der du NetBox öffnest, mit Port, falls nötig.",
+        "es": "La dirección con la que abre NetBox, con su puerto si lo hay."
+      },
+      "placeholder": {
+        "en": "e.g. http://192.168.1.20:8000",
+        "fr": "ex. http://192.168.1.20:8000",
+        "de": "z. B. http://192.168.1.20:8000",
+        "es": "p. ej. http://192.168.1.20:8000"
+      },
+      "required": true
     },
     {
-      "key": "longitude",
-      "type": "number",
-      "label": { "en": "Longitude", "fr": "Longitude" },
-      "description": {
-        "en": "Longitude used for the demo weather sensor.",
-        "fr": "Longitude utilisée par le capteur météo de démonstration."
+      "key": "api_token",
+      "type": "secret",
+      "label": {
+        "en": "API token",
+        "fr": "Jeton d'API",
+        "de": "API-Token",
+        "es": "Token de API"
       },
-      "placeholder": { "en": "e.g. 2.3522", "fr": "ex. 2.3522" },
-      "required": true,
-      "default": 2.3522,
-      "min": -180,
-      "max": 180
+      "description": {
+        "en": "A v1 token (40 characters) or a v2 token (nbt_…) of NetBox 4.5+.",
+        "fr": "Un jeton v1 (40 caractères) ou un jeton v2 (nbt_…) de NetBox 4.5+.",
+        "de": "Ein v1-Token (40 Zeichen) oder ein v2-Token (nbt_…) ab NetBox 4.5.",
+        "es": "Un token v1 (40 caracteres) o un token v2 (nbt_…) de NetBox 4.5+."
+      },
+      "required": true
     },
     {
-      "key": "unit",
+      "key": "prefixes",
+      "type": "string",
+      "label": {
+        "en": "Prefixes to follow",
+        "fr": "Préfixes à suivre",
+        "de": "Zu verfolgende Präfixe",
+        "es": "Prefijos a seguir"
+      },
+      "description": {
+        "en": "Prefixes in CIDR notation or NetBox prefix numbers, separated by commas: each becomes a device with its utilization and free addresses (20 at most).",
+        "fr": "Préfixes en notation CIDR ou numéros de préfixe NetBox, séparés par des virgules : chacun devient un appareil avec son taux d'occupation et ses adresses libres (20 au plus).",
+        "de": "Präfixe in CIDR-Schreibweise oder NetBox-Präfixnummern, durch Kommas getrennt: Jedes wird ein Gerät mit Auslastung und freien Adressen (höchstens 20).",
+        "es": "Prefijos en notación CIDR o números de prefijo de NetBox, separados por comas: cada uno se convierte en un dispositivo con su ocupación y sus direcciones libres (20 como máximo)."
+      },
+      "placeholder": {
+        "en": "e.g. 192.168.1.0/24, 10.0.0.0/16",
+        "fr": "ex. 192.168.1.0/24, 10.0.0.0/16",
+        "de": "z. B. 192.168.1.0/24, 10.0.0.0/16",
+        "es": "p. ej. 192.168.1.0/24, 10.0.0.0/16"
+      },
+      "default": ""
+    },
+    {
+      "key": "usage_threshold",
+      "type": "number",
+      "label": {
+        "en": "Utilization alert threshold (%)",
+        "fr": "Seuil d'alerte d'occupation (%)",
+        "de": "Warnschwelle der Auslastung (%)",
+        "es": "Umbral de alerta de ocupación (%)"
+      },
+      "description": {
+        "en": "The trigger \"Prefix almost full\" fires when a followed prefix reaches it.",
+        "fr": "Le déclencheur « Préfixe presque plein » se déclenche quand un préfixe suivi l'atteint.",
+        "de": "Der Auslöser „Präfix fast voll“ feuert, wenn ein verfolgtes Präfix sie erreicht.",
+        "es": "El disparador «Prefijo casi lleno» se activa cuando un prefijo seguido lo alcanza."
+      },
+      "default": 90,
+      "min": 1,
+      "max": 100
+    },
+    {
+      "key": "refresh_minutes",
       "type": "select",
-      "label": { "en": "Temperature unit", "fr": "Unité de température" },
-      "required": false,
-      "default": "celsius",
+      "label": {
+        "en": "Read NetBox every",
+        "fr": "Lire NetBox toutes les",
+        "de": "NetBox lesen alle",
+        "es": "Leer NetBox cada"
+      },
+      "default": "15",
       "options": [
-        { "value": "celsius", "label": { "en": "Celsius", "fr": "Celsius" } },
-        { "value": "fahrenheit", "label": { "en": "Fahrenheit", "fr": "Fahrenheit" } }
+        {
+          "value": "5",
+          "label": {
+            "en": "5 minutes",
+            "fr": "5 minutes",
+            "de": "5 Minuten",
+            "es": "5 minutos"
+          }
+        },
+        {
+          "value": "15",
+          "label": {
+            "en": "15 minutes",
+            "fr": "15 minutes",
+            "de": "15 Minuten",
+            "es": "15 minutos"
+          }
+        },
+        {
+          "value": "30",
+          "label": {
+            "en": "30 minutes",
+            "fr": "30 minutes",
+            "de": "30 Minuten",
+            "es": "30 minutos"
+          }
+        },
+        {
+          "value": "60",
+          "label": {
+            "en": "60 minutes",
+            "fr": "60 minutes",
+            "de": "60 Minuten",
+            "es": "60 minutos"
+          }
+        }
       ]
     },
     {
-      "key": "poll_frequency",
-      "type": "number",
-      "label": { "en": "Refresh interval (s)", "fr": "Intervalle de rafraîchissement (s)" },
-      "description": {
-        "en": "How often sensors are polled, in seconds (one minute minimum).",
-        "fr": "Fréquence d'interrogation des capteurs, en secondes (une minute minimum)."
+      "key": "language",
+      "type": "select",
+      "label": {
+        "en": "Language of the feature names",
+        "fr": "Langue des noms de fonctionnalités",
+        "de": "Sprache der Funktionsnamen",
+        "es": "Idioma de los nombres de las funciones"
       },
-      "required": false,
-      "default": 300,
-      "min": 60,
-      "max": 3600
+      "description": {
+        "en": "Feature names are fixed when a device is added to Gladys; this language also writes the texts of the integration.",
+        "fr": "Les noms des fonctionnalités sont figés à l'ajout d'un appareil dans Gladys ; cette langue écrit aussi les textes de l'intégration.",
+        "de": "Funktionsnamen werden beim Hinzufügen eines Geräts zu Gladys festgelegt; diese Sprache schreibt auch die Texte der Integration.",
+        "es": "Los nombres de las funciones se fijan al añadir un dispositivo a Gladys; este idioma escribe también los textos de la integración."
+      },
+      "default": "fr",
+      "options": [
+        {
+          "value": "en",
+          "label": {
+            "en": "English",
+            "fr": "Anglais",
+            "de": "Englisch",
+            "es": "Inglés"
+          }
+        },
+        {
+          "value": "fr",
+          "label": {
+            "en": "French",
+            "fr": "Français",
+            "de": "Französisch",
+            "es": "Francés"
+          }
+        },
+        {
+          "value": "de",
+          "label": {
+            "en": "German",
+            "fr": "Allemand",
+            "de": "Deutsch",
+            "es": "Alemán"
+          }
+        },
+        {
+          "value": "es",
+          "label": {
+            "en": "Spanish",
+            "fr": "Espagnol",
+            "de": "Spanisch",
+            "es": "Español"
+          }
+        }
+      ]
     }
   ],
   "actions": [
     {
-      "key": "test_weather",
-      "label": { "en": "Test the weather provider", "fr": "Tester le fournisseur météo" },
-      "timeout_seconds": 30
-    },
+      "key": "test_connection",
+      "label": {
+        "en": "Test the connection",
+        "fr": "Tester la connexion",
+        "de": "Verbindung testen",
+        "es": "Probar la conexión"
+      },
+      "timeout_seconds": 60
+    }
+  ],
+  "widgets": [
     {
-      "key": "identify",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "fields": [
+      "key": "overview",
+      "label": {
+        "en": "NetBox",
+        "fr": "NetBox",
+        "de": "NetBox",
+        "es": "NetBox"
+      },
+      "description": {
+        "en": "Devices by status, IP addresses, VMs, and the fullest prefixes or the last changes.",
+        "fr": "Équipements par statut, adresses IP, VM, et préfixes les plus pleins ou derniers changements.",
+        "de": "Geräte nach Status, IP-Adressen, VMs und die vollsten Präfixe oder letzten Änderungen.",
+        "es": "Dispositivos por estado, direcciones IP, VM y prefijos más llenos o últimos cambios."
+      },
+      "icon": "server",
+      "settings": [
         {
-          "key": "device",
+          "key": "list",
           "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
+          "label": {
+            "en": "List below the tiles",
+            "fr": "Liste sous les tuiles",
+            "de": "Liste unter den Kacheln",
+            "es": "Lista bajo los mosaicos"
+          },
+          "default": "prefixes",
+          "options": [
+            {
+              "value": "prefixes",
+              "label": {
+                "en": "The fullest prefixes",
+                "fr": "Les préfixes les plus pleins",
+                "de": "Die vollsten Präfixe",
+                "es": "Los prefijos más llenos"
+              }
+            },
+            {
+              "value": "changes",
+              "label": {
+                "en": "The last changes",
+                "fr": "Les derniers changements",
+                "de": "Die letzten Änderungen",
+                "es": "Los últimos cambios"
+              }
+            },
+            {
+              "value": "none",
+              "label": {
+                "en": "None",
+                "fr": "Aucune",
+                "de": "Keine",
+                "es": "Ninguna"
+              }
+            }
+          ]
         }
       ]
     }
   ],
   "scene_triggers": [
     {
-      "key": "motion_detected",
-      "label": { "en": "Motion detected", "fr": "Mouvement détecté" },
+      "key": "prefix_usage_high",
+      "label": {
+        "en": "Prefix almost full",
+        "fr": "Préfixe presque plein",
+        "de": "Präfix fast voll",
+        "es": "Prefijo casi lleno"
+      },
       "description": {
-        "en": "A demo motion sensor saw a person or an animal move.",
-        "fr": "Un détecteur de démonstration a vu bouger une personne ou un animal."
+        "en": "A followed prefix reaches the utilization threshold of the configuration (again once it went below).",
+        "fr": "Un préfixe suivi atteint le seuil d'occupation de la configuration (de nouveau après être repassé dessous).",
+        "de": "Ein verfolgtes Präfix erreicht die Auslastungsschwelle der Konfiguration (erneut, nachdem es darunter lag).",
+        "es": "Un prefijo seguido alcanza el umbral de ocupación de la configuración (de nuevo tras bajar de él)."
       },
       "fields": [
         {
           "key": "device",
           "type": "select",
           "source": "devices",
-          "label": { "en": "Sensor", "fr": "Détecteur" }
+          "label": {
+            "en": "Prefix (empty: any)",
+            "fr": "Préfixe (vide : tous)",
+            "de": "Präfix (leer: alle)",
+            "es": "Prefijo (vacío: todos)"
+          }
+        }
+      ],
+      "variables": [
+        {
+          "key": "prefix",
+          "type": "string",
+          "label": {
+            "en": "Prefix",
+            "fr": "Préfixe",
+            "de": "Präfix",
+            "es": "Prefijo"
+          }
         },
         {
-          "key": "target",
-          "type": "multi_select",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" },
+          "key": "vrf",
+          "type": "string",
+          "label": {
+            "en": "VRF",
+            "fr": "VRF",
+            "de": "VRF",
+            "es": "VRF"
+          }
+        },
+        {
+          "key": "utilization",
+          "type": "number",
+          "label": {
+            "en": "Utilization (%)",
+            "fr": "Occupation (%)",
+            "de": "Auslastung (%)",
+            "es": "Ocupación (%)"
+          }
+        },
+        {
+          "key": "free_addresses",
+          "type": "number",
+          "label": {
+            "en": "Free addresses",
+            "fr": "Adresses libres",
+            "de": "Freie Adressen",
+            "es": "Direcciones libres"
+          }
+        },
+        {
+          "key": "threshold",
+          "type": "number",
+          "label": {
+            "en": "Threshold (%)",
+            "fr": "Seuil (%)",
+            "de": "Schwelle (%)",
+            "es": "Umbral (%)"
+          }
+        }
+      ]
+    },
+    {
+      "key": "device_change",
+      "label": {
+        "en": "Device created or deleted",
+        "fr": "Équipement créé ou supprimé",
+        "de": "Gerät erstellt oder gelöscht",
+        "es": "Dispositivo creado o eliminado"
+      },
+      "description": {
+        "en": "A device is created or deleted in NetBox (seen in the change log at the next read).",
+        "fr": "Un équipement est créé ou supprimé dans NetBox (vu dans le journal des changements à la lecture suivante).",
+        "de": "Ein Gerät wird in NetBox erstellt oder gelöscht (im Änderungsprotokoll beim nächsten Lesen erkannt).",
+        "es": "Se crea o elimina un dispositivo en NetBox (visto en el registro de cambios en la siguiente lectura)."
+      },
+      "fields": [
+        {
+          "key": "action",
+          "type": "select",
+          "label": {
+            "en": "Change (empty: both)",
+            "fr": "Changement (vide : les deux)",
+            "de": "Änderung (leer: beide)",
+            "es": "Cambio (vacío: ambos)"
+          },
           "options": [
-            { "value": "person", "label": { "en": "Person", "fr": "Personne" } },
-            { "value": "animal", "label": { "en": "Animal", "fr": "Animal" } }
+            {
+              "value": "create",
+              "label": {
+                "en": "Created",
+                "fr": "Création",
+                "de": "Erstellt",
+                "es": "Creación"
+              }
+            },
+            {
+              "value": "delete",
+              "label": {
+                "en": "Deleted",
+                "fr": "Suppression",
+                "de": "Gelöscht",
+                "es": "Eliminación"
+              }
+            }
           ]
         }
       ],
       "variables": [
         {
-          "key": "target",
+          "key": "action_text",
           "type": "string",
-          "label": { "en": "What moved", "fr": "Ce qui a bougé" }
+          "label": {
+            "en": "Change",
+            "fr": "Changement",
+            "de": "Änderung",
+            "es": "Cambio"
+          }
+        },
+        {
+          "key": "device",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Équipement",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
+        },
+        {
+          "key": "device_id",
+          "type": "number",
+          "label": {
+            "en": "Device number",
+            "fr": "Numéro de l'équipement",
+            "de": "Gerätenummer",
+            "es": "Número del dispositivo"
+          }
+        },
+        {
+          "key": "user",
+          "type": "string",
+          "label": {
+            "en": "User",
+            "fr": "Utilisateur",
+            "de": "Benutzer",
+            "es": "Usuario"
+          }
+        },
+        {
+          "key": "time",
+          "type": "string",
+          "label": {
+            "en": "Time of the change",
+            "fr": "Heure du changement",
+            "de": "Zeitpunkt der Änderung",
+            "es": "Hora del cambio"
+          }
         }
       ]
     }
   ],
   "scene_actions": [
     {
-      "key": "identify_device",
-      "label": { "en": "Identify a device", "fr": "Identifier un appareil" },
-      "description": {
-        "en": "Make a device signal itself (the demo light blinks).",
-        "fr": "Fait se signaler un appareil (la lampe de démonstration clignote)."
+      "key": "add_journal_entry",
+      "label": {
+        "en": "Add a NetBox journal entry",
+        "fr": "Ajouter une entrée de journal NetBox",
+        "de": "NetBox-Journaleintrag hinzufügen",
+        "es": "Añadir una entrada al diario de NetBox"
       },
-      "timeout_seconds": 15,
+      "description": {
+        "en": "Writes a journal entry on a NetBox device, given by its name or number (needs a token with write access).",
+        "fr": "Écrit une entrée de journal sur un équipement NetBox, désigné par son nom ou son numéro (jeton autorisé en écriture).",
+        "de": "Schreibt einen Journaleintrag zu einem NetBox-Gerät, angegeben über Name oder Nummer (Token mit Schreibrecht).",
+        "es": "Escribe una entrada de diario en un dispositivo de NetBox, indicado por su nombre o número (token con escritura)."
+      },
+      "timeout_seconds": 30,
       "fields": [
         {
           "key": "device",
+          "type": "string",
+          "required": true,
+          "label": {
+            "en": "NetBox device name or number",
+            "fr": "Nom ou numéro de l'équipement NetBox",
+            "de": "Name oder Nummer des NetBox-Geräts",
+            "es": "Nombre o número del dispositivo de NetBox"
+          },
+          "placeholder": {
+            "en": "e.g. ups-rack1",
+            "fr": "ex. onduleur-baie1",
+            "de": "z. B. usv-rack1",
+            "es": "p. ej. sai-rack1"
+          }
+        },
+        {
+          "key": "kind",
           "type": "select",
-          "source": "devices",
-          "label": { "en": "Device", "fr": "Appareil" },
-          "required": true
+          "label": {
+            "en": "Kind (empty: info)",
+            "fr": "Type (vide : info)",
+            "de": "Art (leer: Info)",
+            "es": "Tipo (vacío: info)"
+          },
+          "options": [
+            {
+              "value": "info",
+              "label": {
+                "en": "Info",
+                "fr": "Info",
+                "de": "Info",
+                "es": "Info"
+              }
+            },
+            {
+              "value": "success",
+              "label": {
+                "en": "Success",
+                "fr": "Succès",
+                "de": "Erfolg",
+                "es": "Éxito"
+              }
+            },
+            {
+              "value": "warning",
+              "label": {
+                "en": "Warning",
+                "fr": "Avertissement",
+                "de": "Warnung",
+                "es": "Advertencia"
+              }
+            },
+            {
+              "value": "danger",
+              "label": {
+                "en": "Danger",
+                "fr": "Danger",
+                "de": "Gefahr",
+                "es": "Peligro"
+              }
+            }
+          ]
+        },
+        {
+          "key": "comments",
+          "type": "string",
+          "required": true,
+          "label": {
+            "en": "Text of the entry",
+            "fr": "Texte de l'entrée",
+            "de": "Text des Eintrags",
+            "es": "Texto de la entrada"
+          },
+          "description": {
+            "en": "Scene variables are welcome: the sensor and its value, the time…",
+            "fr": "Les variables de scène sont bienvenues : le capteur et sa valeur, l'heure…",
+            "de": "Szenenvariablen sind willkommen: der Sensor und sein Wert, die Uhrzeit …",
+            "es": "Las variables de escena son bienvenidas: el sensor y su valor, la hora…"
+          }
         }
       ],
       "outputs": [
         {
-          "key": "signalled",
-          "type": "boolean",
-          "label": { "en": "Device signalled", "fr": "Appareil signalé" }
+          "key": "entry_id",
+          "type": "number",
+          "label": {
+            "en": "Entry number",
+            "fr": "Numéro de l'entrée",
+            "de": "Eintragsnummer",
+            "es": "Número de la entrada"
+          }
+        },
+        {
+          "key": "device",
+          "type": "string",
+          "label": {
+            "en": "Device",
+            "fr": "Équipement",
+            "de": "Gerät",
+            "es": "Dispositivo"
+          }
         }
       ]
-    }
-  ],
-  "widgets": [
-    {
-      "key": "demo_status",
-      "label": { "en": "Demo status", "fr": "État de la démo" },
-      "description": {
-        "en": "Live temperature and plug power, plug connection and observed location.",
-        "fr": "Température et puissance en direct, connexion de la prise, position observée."
-      },
-      "icon": "activity",
-      "action_timeout_seconds": 15
     }
   ]
 }
