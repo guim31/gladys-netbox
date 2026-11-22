@@ -10,6 +10,8 @@ the notes of the version's GitHub Release.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-11-22
+
 ### Added
 
 - A NetBox device: reachable, version, active, offline and failed devices, IP
@@ -22,3 +24,6 @@ the notes of the version's GitHub Release.
 - Scene action "Add a NetBox journal entry".
 - v1 and v2 (`nbt_…`) API tokens; NetBox 3.7 to 4.x (tested on 4.7.5).
 - Texts and documentation in English, French, German and Spanish.
+
+[Unreleased]: https://github.com/guim31/gladys-netbox/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/guim31/gladys-netbox/releases/tag/v1.0.0
