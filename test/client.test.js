@@ -80,10 +80,11 @@ test('a timeout is reported as such', async () => {
     url: HOST,
     token: TOKEN,
     timeout: 20,
-    fetch: (url, init) =>
-      new Promise((resolve, reject) =>
-        init.signal.addEventListener('abort', () => reject(init.signal.reason)),
-      ),
+    // What fetch rejects with when AbortSignal.timeout fires (its timer does
+    // not keep the event loop alive on Node 22: no real wait here).
+    fetch: async () => {
+      throw new DOMException('The operation was aborted due to timeout', 'TimeoutError');
+    },
   });
   assert.equal(await kindOf(netbox.status()), 'timeout');
 });
