@@ -278,7 +278,8 @@ permission to perform this action.` : seul le `detail` les distingue. Objet abse
   `{"champ": ["message"]}`.
 - Listes `{ count, next, previous, results }` ; `limit=1&brief=1` suffit pour un compte. Filtres vérifiés :
   `status`, `prefix`, `within`, `parent` (adresses et plages), `vrf_id=null` (table globale),
-  `changed_object_type=dcim.device`, `name__ie` (nom sans casse). Le journal des changements est trié du
+  `changed_object_type=dcim.device`, `name__ie` (nom sans casse). `id__gt` (nouveaux changements) vient des
+  recherches numériques génériques de NetBox, non essayé sur le serveur de test. Le journal des changements est trié du
   plus récent au plus ancien ; il est passé de `extras` à `core` en 4.1 (le client essaie `core`, puis
   `extras` sur 404).
 - **L'API ne donne pas l'occupation d'un préfixe** : on la recalcule comme `Prefix.get_utilization()`

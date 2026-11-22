@@ -260,6 +260,28 @@ export class Hub {
     return utilization(prefix, { ipCount, ranges });
   }
 
+  /** The device changes after `known`, or the newest one alone (a new baseline). */
+  async #deviceChanges(client, known) {
+    const baseline = () => client.changes({ changed_object_type: 'dcim.device', limit: '1' });
+    if (!Number.isInteger(known)) {
+      return baseline();
+    }
+    try {
+      return await client.changes(
+        { changed_object_type: 'dcim.device', id__gt: String(known) },
+        { all: true },
+      );
+    } catch (err) {
+      // Tens of thousands of changes since the last read (a long outage): a
+      // new baseline rather than a read failing forever.
+      if (!(err instanceof NetBoxError && err.kind === 'invalid' && /pages/.test(err.message))) {
+        throw err;
+      }
+      logger.warn('Too many device changes since the last read: they are not announced');
+      return baseline();
+    }
+  }
+
   async #read(client) {
     if (!this.version) {
       const status = await client.status();
@@ -280,20 +302,13 @@ export class Hub {
     // edit must not push a creation out of the window); the first read only
     // needs the newest one, as a baseline.
     const known = this.notified?.instance === this.config.url ? this.notified.lastChangeId : null;
-    const deviceChanges =
-      changes &&
-      (Number.isInteger(known)
-        ? await client.changes(
-            { changed_object_type: 'dcim.device', id__gt: String(known) },
-            { all: true },
-          )
-        : await client.changes({ changed_object_type: 'dcim.device', limit: '1' }));
+    const deviceChanges = changes && (await this.#deviceChanges(client, known));
     const prefixes = [];
     const missing = [];
     const seen = new Set();
     for (const entry of this.config.prefixes) {
       const found = await this.#resolve(client, entry);
-      if (found === null || found.length === 0) {
+      if (found.length === 0) {
         missing.push(entry);
         this.#warnOnce(`missing:${entry}`, `Prefix ${entry} not found in NetBox`);
         continue;
@@ -423,7 +438,7 @@ export class Hub {
       if (next.lastChangeId === null) {
         next.lastChangeId = newest;
       } else {
-        const fresh = changes
+        const fresh = [...new Map(changes.map((change) => [change.id, change])).values()]
           .filter(
             (change) =>
               change.id > next.lastChangeId &&
